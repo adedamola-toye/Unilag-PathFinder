@@ -2,6 +2,7 @@ body{
   background-color: whitesmoke
 }
 
+/* LOGO AND TITLE */
 .logo-img{
   width: 60px;
   
@@ -16,4 +17,34 @@ body{
 
 .title{
   font-size: 1.6rem;
+}
+/* -----------------------------------------------------------*/
+
+/*LOCATION INPUT*/
+.input-wrapper{
+  width: 250px;
+  border-radius : 10px;
+  background-color: white;
+  height: 2.5rem;
+  padding: 0 15px;
+  box-shadow: 0px 0px 8px #ddd;
+  display:flex;
+  align-items: center;
+  gap: 5px;
+}
+
+input{
+  background-color: transparent;
+  border: none;
+  height: 100%;
+  font-size: 1rem;
+  width: 100%;
+}
+
+input:focus{
+  outline: none;
+}
+
+.location-icon{
+  color: #1266f1;
 }
