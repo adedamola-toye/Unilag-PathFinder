@@ -1,10 +1,10 @@
-import UnilagLogo from "../assets/Unilag Logo.png";
+import UnilagLogo from "../assets/unilag-logo.svg";
 function LogoAndTitle() {
   return (
     <>
       <div className="logo-and-title">
         <img src={UnilagLogo} alt="University of Lagos Logo" className="logo-img" />
-        <h1>Unilag PathFinder</h1>
+        <h1 className="title">Unilag PathFinder</h1>
       </div>
     </>
   );

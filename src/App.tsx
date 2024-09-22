@@ -1,4 +1,5 @@
 import LogoAndTitle from "./components/LogoAndTitle"
+import './App.css'
 function App() {
   
 
