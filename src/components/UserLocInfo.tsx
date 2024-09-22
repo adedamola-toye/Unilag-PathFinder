@@ -47,14 +47,16 @@ function UserLocInfo() {
     setCurrentLocation(suggestion);
     setCurrentLocationInput(suggestion);
     setFilteredCurrentLocationSuggestions([]);
-    setCurrentLocationError(null)
+    setCurrentLocationError(null);
+    console.log(currentLocation)
   };
 
   const handleDestinationSuggestionClick = (suggestion: string) => {
     setDestination(suggestion);
     setDestinationInput(suggestion);
     setFilteredDestinationSuggestions([]);
-    setDestinationLocationError(null)
+    setDestinationLocationError(null);
+    console.log(destination)
   };
 
   //When user leaves the current input filed without clicking anything from suggestions
