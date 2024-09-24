@@ -60,7 +60,7 @@ function UserLocInfo() {
   };
 
   //When user leaves the current input filed without clicking anything from suggestions
-  const handleCurrentLocationBlur = () => {
+/*   const handleCurrentLocationBlur = () => {
     //If what the user entered is not in the locations array show error
     if(!locations.includes(currentLocationInput)){
         setCurrentLocationError("Location not found. Please select a valid location");
@@ -70,9 +70,9 @@ function UserLocInfo() {
         setCurrentLocation(currentLocationInput);
         setCurrentLocationError(null)
     }
-  };
+  }; */
 
-  const handleDestinationLocationBlur = () => {
+/*   const handleDestinationLocationBlur = () => {
     if(!locations.includes(destinationInput)){
         setDestinationLocationError("Location not found. Please select a valid location");
         setDestination("")
@@ -81,7 +81,7 @@ function UserLocInfo() {
         setDestination(destinationInput);
         setDestinationLocationError(null)
     }
-  }
+  } */
 
   return (
     <div className="userLocSection">
@@ -90,7 +90,7 @@ function UserLocInfo() {
         placeholder="Your current location"
         value={currentLocationInput}
         onChange={handleCurrentLocationInput}
-        onBlur = {handleCurrentLocationBlur}//when user leaves the input field
+        /* onBlur = {handleCurrentLocationBlur} *///when user leaves the input field
       />
       {filteredCurrentLocationSuggestions.length > 0 && (
         <ul className="location-suggestions">
@@ -113,10 +113,10 @@ function UserLocInfo() {
         placeholder="Your destination"
         value={destinationInput}
         onChange={handleDestinationInput}
-        onBlur = {handleDestinationLocationBlur}
+        /* onBlur = {handleDestinationLocationBlur} */
       />
       {filteredDestinationSuggestions.length > 0 && (
-        <ul className="location-suggestion">
+        <ul className="location-suggestions">
           {filteredDestinationSuggestions.map((suggestion, index) => (
             <li
               key={index}
@@ -131,7 +131,7 @@ function UserLocInfo() {
       )}
       {destinationLocationError && <p className = "error-message">{destinationLocationError}</p>}
 
-      <button type="submit">Direct Me</button>
+      <button type="submit" className="direct-me-btn">Direct Me</button>
     </div>
   );
 }

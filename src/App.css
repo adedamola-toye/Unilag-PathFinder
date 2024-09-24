@@ -48,3 +48,60 @@ input:focus{
 .location-icon{
   color: #1266f1;
 }
+
+
+/* ------------------------------------------------------------------------*/
+/*LOCATION SUGGESTIONS*/
+.location-suggestions{
+  max-height: 150px;
+  background-color: white;
+  width: 250px;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0px 0px 8px #ddd;
+  border-radius: 10px;
+  margin-top: 0.5rem;
+  list-style-type: none;
+  padding: 1rem;
+}
+
+.location-suggestions li{
+  width: 100%;
+  cursor: pointer;
+  padding-top: 20px;
+  padding-bottom: 15px;
+
+}
+
+.location-suggestions li:hover, 
+.location-suggestions li:focus{
+  background-color: #f0f0f0;
+  
+}
+
+.direct-me-btn{
+  margin-top: 2rem;
+  padding: 0.7rem 1.5rem;
+  border-radius: 10px;
+  background-color: #366dc5;
+  color: white;
+  font-size: 1rem;
+  border: 1px solid #366dc5;
+  cursor: pointer;
+}
+
+.direct-me-btn:hover{
+  background-color: #2b57a5;
+  transform: scale(1.05);
+}
+
+.direct-me-btn:active{
+  background-color: #1f3e73;
+  transform: scale(0.98);
+}
+
+.direct-me-btn:focus {
+  outline: none; 
+  box-shadow: 0 0 0 4px rgba(54, 109, 197, 0.4); 
+}

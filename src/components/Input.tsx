@@ -5,7 +5,7 @@ interface InputProps {
   placeholder: string;
   value: string;
   onChange: React.ChangeEventHandler<HTMLInputElement>;
-  onBlur: React.FocusEventHandler<HTMLInputElement>
+  /* onBlur: React.FocusEventHandler<HTMLInputElement> */
 }
 
 function Input({
@@ -13,7 +13,7 @@ function Input({
   placeholder,
   value,
   onChange,
-  onBlur
+  /* onBlur */
 
 }: InputProps) {
   return (
@@ -28,7 +28,7 @@ function Input({
           placeholder={placeholder}
           value={value}
           onChange={onChange}
-          onBlur = {onBlur}
+          /* onBlur = {onBlur} */
         />
       </div>
     </>

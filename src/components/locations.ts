@@ -11,6 +11,7 @@ export const locations = [
     "Faculty of Management Sciences",
     "Faculty of Social Sciences",
     "Distance Learning Institue (DLI)",
+    "New Hall Shopping Complex",
     "Eni Njoku Hostel",
     "King Jaja Hostel",
     "Mariere Hostel",
