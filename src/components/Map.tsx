@@ -48,8 +48,8 @@ function Map() {
   return (
     <MapContainer
       center={[6.51788, 3.38672]} 
-      zoom={15} 
-      minZoom={14} 
+      zoom={17} 
+      minZoom={16} 
       style={{ height: "500px", width: "100%" }}
       scrollWheelZoom={true}
     >
