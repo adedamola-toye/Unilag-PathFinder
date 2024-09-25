@@ -20,7 +20,7 @@ export const locationsCoordinates = [
         longitude: 3.385583,
     },
     {
-        location: "Faculty of Environmental Science",
+        location: "Faculty of Environmental Sciences",
         latitude: 6.51809, 
         longitude: 3.38700,
     },
@@ -40,7 +40,7 @@ export const locationsCoordinates = [
         longitude: 3.39927
     },
     {
-        location: "Faculty of Management Science",
+        location: "Faculty of Management Sciences",
         latitude: 6.52100, 
         longitude: 3.39951,
     },
@@ -53,6 +53,96 @@ export const locationsCoordinates = [
         location: "Faculty of Social Sciences",
         latitude: 6.51616, 
         longitude: 3.39171
+    },
+    {
+        location: "Distance Learning Institute (DLI)",
+        latitude: 6.51219, 
+        longitude: 3.39203
+    },
+    {
+        location: "ISL, Unilag",
+        latitude: 6.51122,
+        longitude: 3.39150
+    },
+    {
+        location: "Unilag Women Society Hostel (ULWS)",
+        latitude: 6.51143, 
+        longitude: 3.39328,
+    },
+    {
+        location:"New Hall Shopping Complex",
+        latitude: 6.51891, 
+        longitude: 3.39253,
+    },
+    {
+        location:"New Hall ",
+        latitude: 6.51931, 
+        longitude: 3.39198 ,
+    },
+    {
+        location:"Eni Njoku Hostel",
+        latitude: 6.51933, 
+        longitude: 3.39346,
+    },
+    {
+        location:"King Jaja Hostel",
+        latitude: 6.51642,
+        longitude: 3.39777
+    },
+    {
+        location:"Moremi Hostel",
+        latitude: 6.51819, 
+        longitude: 3.39714
+    },
+    {
+        location:"Mariere Hostel",
+        latitude: 6.51826, 
+        longitude: 3.39808
+    },
+    {
+        location:"Biobaku Hostel",
+        latitude: 6.51519, 
+        longitude: 3.38715,
+    },
+    {
+        location:"Sodeinde Hostel",
+        latitude: 6.51952, 
+        longitude: 3.39308
+    },
+    {
+        location:"El Kanemi Hostel",
+        latitude: 6.51624, 
+        longitude: 3.38457
+    },
+    {
+        location: "Fagunwa Hostel",
+        latitude: 6.52007, 
+        longitude: 3.39197,
+    },
+    {
+        location:"Kofo Ademola Hostel",
+        latitude: 6.51509, 
+        longitude: 3.38579,
+    },
+    {
+        location:"Madam Tinubu Hostel (MTH)",
+        latitude: 6.52056, 
+        longitude: 3.39164,
+    },
+    {
+        location: "Amina Hostel",
+        latitude: 6.51519,
+        longitude: 3.38551,
+    },
+    {
+        location: "Makama Hostel",
+        latitude: 6.51972,
+        longitude:  3.39218,
+    },
+    {
+        location:"Kofo Ademola Hostel",
+        latitude: 6.51509, 
+        longitude: 3.38579,
     },
     
 
