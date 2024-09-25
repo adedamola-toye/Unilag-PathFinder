@@ -181,8 +181,9 @@ export const locationsCoordinates = [
     },
     {
         location: "Chapel of Christ Church",
-        latitude: 6.51948,
+        latitude: 6.51867,
         longitude:  3.38959
+
     },
     {
         location:  "St. Thomas More Catholic Chaplaincy",

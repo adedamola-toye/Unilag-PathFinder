@@ -17,11 +17,11 @@ function Input({
 
 }: InputProps) {
   return (
-    <>
+    <div className="location-input">
       <label htmlFor="" className="inputLabel">
         {label}
       </label>
-      <div className="input-wrapper">
+      <div className="input-and-icon">
         <FaMapMarkerAlt className="location-icon"/>
         <input
           type="text"
@@ -31,7 +31,7 @@ function Input({
           /* onBlur = {onBlur} */
         />
       </div>
-    </>
+    </div>
   );
 }
 
