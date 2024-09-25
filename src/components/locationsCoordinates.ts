@@ -170,29 +170,114 @@ export const locationsCoordinates = [
         longitude: 3.39442
     },
     {
-        location: "First Bank",
-        latitude: 6.51309, 
-        longitude: 3.39070
+        location: "Unilag DSA Building",
+        latitude: 6.51734, 
+        longitude: 3.39766
     },
     {
-        location: "First Bank",
-        latitude: 6.51309, 
-        longitude: 3.39070
+        location: "Unilag Central Mosque",
+        latitude: 6.51929, 
+        longitude: 3.39012
     },
     {
-        location: "First Bank",
-        latitude: 6.51309, 
-        longitude: 3.39070
+        location: "Chapel of Christ Church",
+        latitude: 6.51948,
+        longitude:  3.38959
     },
     {
-        location: "First Bank",
-        latitude: 6.51309, 
-        longitude: 3.39070
+        location:  "St. Thomas More Catholic Chaplaincy",
+        latitude: 6.51817,
+        longitude:  3.38926
     },
     {
-        location: "First Bank",
-        latitude: 6.51309, 
-        longitude: 3.39070
+        location: "Campus Cab Park",
+        latitude: 6.51841, 
+        longitude: 3.39726 
+    },
+    {
+        location: "Education Cab Park",
+        latitude: 6.51768, 
+        longitude: 3.38616 
+    },
+    {
+        location:"Main Library",
+        latitude: 6.52031, 
+        longitude: 3.39987
+    },
+    {
+        location: "Unilag Health Centre",
+        latitude: 6.51456, 
+        longitude: 3.39658
+    },
+    {
+        location:  "Senate Building",
+        latitude: 6.52738, 
+        longitude: 3.39708
+    },
+    {
+        location: "Lagoon Front",
+        latitude: 6.52175, 
+        longitude: 3.40016
+    },
+    {
+        location: "Nithub",
+        latitude: 6.51663, 
+        longitude: 3.39134
+    },
+    {
+        location: "Ozolua BQs",
+        latitude: 6.51301,
+        longitude: 3.39648,
+    },
+    {
+        location: "Scholars Suites",
+        latitude: 6.51356, 
+        longitude: 3.39711
+    },
+    {
+        location: "Unilag Guest House",
+        latitude: 6.52186, 
+        longitude: 3.39930
+    },
+    {
+        location: "Afe Babalola Auditorium",
+        latitude: 6.51866, 
+        longitude: 3.39668
+    },
+    {
+        location: "J.F. Ade Ajayi Auditorium (Main Auditorium)",
+        latitude: 6.51946, 
+        longitude: 3.39925
+    },
+    {
+        location: "Julius Berger Hall",
+        latitude: 6.51771, 
+        longitude: 3.40017
+    },
+    {
+        location: "Tayo Aderinokun Lecture Theatre",
+        latitude: 6.52234, 
+        longitude: 3.39836
+    },
+    {
+        location: "Julius Berger Hall",
+        latitude: 6.51771, 
+        longitude: 3.40017
+    },
+    {
+        location: "Jelili Adebisi Omotola Hall (Unilag Multipurpose Hall)",
+        latitude: 6.51674, 
+        longitude: 3.38728
+    },
+    {
+        location:  "Nurudeen Alao Auditorium",
+        latitude: 6.51251, 
+        longitude: 3.39258
+    },
+    {
+        location: "Unilag Amphiteathre",
+        latitude: 6.51817, 
+        longitude: 3.38998
     },
 
     

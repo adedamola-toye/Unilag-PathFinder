@@ -44,7 +44,7 @@ export const locations = [
     "Senate Building",
     "Lagoon Front",
     "Nithub",
-    "Ozolua",
+    "Ozolua BQs",
     "Scholars Suites",
     "Unilag Guest House",
     "Afe Babalola Auditorium",
