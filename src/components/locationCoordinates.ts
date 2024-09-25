@@ -91,8 +91,8 @@ export const locationsCoordinates = [
     },
     {
         location:"Moremi Hostel",
-        latitude: 6.51819, 
-        longitude: 3.39714
+        latitude: 6.51870, 
+        longitude: 3.39732
     },
     {
         location:"Mariere Hostel",
@@ -140,10 +140,61 @@ export const locationsCoordinates = [
         longitude:  3.39218,
     },
     {
-        location:"Kofo Ademola Hostel",
-        latitude: 6.51509, 
-        longitude: 3.38579,
+        location: "Wema Bank",
+        latitude: 6.51739, 
+        longitude: 3.38687,
     },
+    {
+        location: "GTB Bank",
+        latitude: 6.51733, 
+        longitude: 3.39779,
+    },
+    {
+        location: "UBA Bank",
+        latitude: 6.51988, 
+        longitude: 3.39998,
+    },
+    {
+        location: "Access Bank",
+        latitude: 6.51904, 
+        longitude: 3.39188,
+    },
+    {
+        location: "First Bank",
+        latitude: 6.51309, 
+        longitude: 3.39070
+    },
+    {
+        location: "Unilag Microfinance Bank",
+        latitude: 6.51887, 
+        longitude: 3.39442
+    },
+    {
+        location: "First Bank",
+        latitude: 6.51309, 
+        longitude: 3.39070
+    },
+    {
+        location: "First Bank",
+        latitude: 6.51309, 
+        longitude: 3.39070
+    },
+    {
+        location: "First Bank",
+        latitude: 6.51309, 
+        longitude: 3.39070
+    },
+    {
+        location: "First Bank",
+        latitude: 6.51309, 
+        longitude: 3.39070
+    },
+    {
+        location: "First Bank",
+        latitude: 6.51309, 
+        longitude: 3.39070
+    },
+
     
 
 ]  
