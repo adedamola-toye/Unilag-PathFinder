@@ -1,54 +1,67 @@
 import { useState } from "react";
 import Input from "./Input";
 import { locations } from "./locations.ts";
+import { dijkstra} from "./dijkstra"; // Importing Dijkstra and the graph
+import { graph } from "./graphData.ts";
+/* import {Coordinates} from './locationsCoordinates.ts' */
+
+interface DirectionsProps {
+  directions: string[];
+  onBack: () => void;
+}
+
+function Directions({ directions, onBack }: DirectionsProps) {
+  return (
+    <div>
+      <h2>{`Directions from ${directions[0]} to ${directions[directions.length - 1]}`}</h2>
+      <ul>
+        {directions.map((step, index) => (
+          <li key={index}>{step}</li>
+        ))}
+      </ul>
+      <button onClick={onBack}>Back Home</button>
+    </div>
+  );
+}
 
 
-function UserLocInfo() {
+function UserLocInfo({ onShowDirections }: { onShowDirections: (path: string[], distance: number) => void }) {
   const [currentLocationInput, setCurrentLocationInput] = useState(""); //User's raw input for current location
-  const [
-    filteredCurrentLocationSuggestions,
-    setFilteredCurrentLocationSuggestions,
-  ] = useState<string[]>([]); //Suggestions array for current location
-  const [currentLocation, setCurrentLocation] = useState(""); //Validated current location
-  const [currentLocationError, setCurrentLocationError] = useState<string|null>(null);
+  const [filteredCurrentLocationSuggestions, setFilteredCurrentLocationSuggestions] = useState<string[]>([]); //Suggestions array for current location
+  const [currentLocation, setCurrentLocation] =  useState<string| null>(""); //Validated current location
+  const [currentLocationError, setCurrentLocationError] = useState<string | null>(null);
 
   const [destinationInput, setDestinationInput] = useState(""); //User's raw input for destination
-  const [filteredDestinationSuggestions, setFilteredDestinationSuggestions] =
-    useState<string[]>([]); //Suggestions array for destination location
-  const [destination, setDestination] = useState(""); //Validated destination location
-  const [destinationLocationError, setDestinationLocationError] = useState<string|null>(null)
+  const [filteredDestinationSuggestions, setFilteredDestinationSuggestions] = useState<string[]>([]); //Suggestions array for destination location
+  const [destination, setDestination] =  useState<string| null>(""); //Validated destination location
+  const [destinationLocationError, setDestinationLocationError] = useState<string | null>(null);
+  const [directions, setDirections] = useState<string[] | null>(null);
 
-  const handleCurrentLocationInput = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
+  const handleCurrentLocationInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     const userInput = event.target.value;
     setCurrentLocationInput(userInput);
     const filteredLocations = locations.filter((location) =>
       location.toLowerCase().includes(userInput.toLowerCase())
     );
     setFilteredCurrentLocationSuggestions(filteredLocations);
-    setCurrentLocationError(null)
+    setCurrentLocationError(null);
   };
 
-  const handleDestinationInput = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
+  const handleDestinationInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     const userInput = event.target.value;
     setDestinationInput(userInput);
     const filteredLocations = locations.filter((location) =>
       location.toLowerCase().includes(userInput.toLowerCase())
     );
     setFilteredDestinationSuggestions(filteredLocations);
-    setDestinationLocationError(null)
+    setDestinationLocationError(null);
   };
 
-  //When user clicks on a suggestion
   const handleCurrentLocationSuggestionClick = (suggestion: string) => {
     setCurrentLocation(suggestion);
     setCurrentLocationInput(suggestion);
     setFilteredCurrentLocationSuggestions([]);
     setCurrentLocationError(null);
-    console.log(currentLocation)
   };
 
   const handleDestinationSuggestionClick = (suggestion: string) => {
@@ -56,32 +69,47 @@ function UserLocInfo() {
     setDestinationInput(suggestion);
     setFilteredDestinationSuggestions([]);
     setDestinationLocationError(null);
-    console.log(destination)
   };
 
-  //When user leaves the current input filed without clicking anything from suggestions
-/*   const handleCurrentLocationBlur = () => {
-    //If what the user entered is not in the locations array show error
-    if(!locations.includes(currentLocationInput)){
-        setCurrentLocationError("Location not found. Please select a valid location");
-        setCurrentLocation("")
+  const handleCalculateRoute = () => {
+    if (currentLocation && destination) {
+      const result = dijkstra(graph, currentLocation, destination);
+      if (result && result.path.length > 0) {
+        const { path, distance } = result;
+  
+        const directionsSteps = path.map(locId => graph[locId].id);
+  
+        setDirections(directionsSteps);
+  
+        const pathCoordinates = path.map(locId => ({
+          location: graph[locId].id,
+          latitude: graph[locId].coordinates[0],
+          longitude: graph[locId].coordinates[1],
+        }));
+        console.log(pathCoordinates)
+  
+        onShowDirections(directionsSteps, distance); 
+      } else {
+       
+        setCurrentLocationError("No valid path found.");
+      }
+    } else {
+      // Handle missing inputs
+      if (!currentLocation) setCurrentLocationError("Please select your current location.");
+      if (!destination) setDestinationLocationError("Please select your destination.");
     }
-    else{//if what user entered is in locations array process it as the currentLocation
-        setCurrentLocation(currentLocationInput);
-        setCurrentLocationError(null)
-    }
-  }; */
+  };
+  
 
-/*   const handleDestinationLocationBlur = () => {
-    if(!locations.includes(destinationInput)){
-        setDestinationLocationError("Location not found. Please select a valid location");
-        setDestination("")
-    }
-    else{
-        setDestination(destinationInput);
-        setDestinationLocationError(null)
-    }
-  } */
+  const handleBackHome = () => {
+    setDirections(null);
+    setCurrentLocation(null);
+    setDestination(null);
+  };
+
+  if (directions) {
+    return <Directions directions={directions} onBack={handleBackHome} />;
+  }
 
   return (
     <div className="userLocSection">
@@ -90,7 +118,6 @@ function UserLocInfo() {
         placeholder="Your current location"
         value={currentLocationInput}
         onChange={handleCurrentLocationInput}
-        /* onBlur = {handleCurrentLocationBlur} *///when user leaves the input field
       />
       {filteredCurrentLocationSuggestions.length > 0 && (
         <ul className="location-suggestions">
@@ -106,14 +133,13 @@ function UserLocInfo() {
           ))}
         </ul>
       )}
-      {currentLocationError && <p className = "error-message">{currentLocationError}</p>}
+      {currentLocationError && <p className="error-message">{currentLocationError}</p>}
 
       <Input
         label="Where are you going?"
         placeholder="Your destination"
         value={destinationInput}
         onChange={handleDestinationInput}
-        /* onBlur = {handleDestinationLocationBlur} */
       />
       {filteredDestinationSuggestions.length > 0 && (
         <ul className="location-suggestions">
@@ -129,9 +155,11 @@ function UserLocInfo() {
           ))}
         </ul>
       )}
-      {destinationLocationError && <p className = "error-message">{destinationLocationError}</p>}
+      {destinationLocationError && <p className="error-message">{destinationLocationError}</p>}
 
-      <button type="submit" className="direct-me-btn">Direct Me</button>
+      <button type="submit" onClick={handleCalculateRoute} className="direct-me-btn">
+        Direct Me
+      </button>
     </div>
   );
 }

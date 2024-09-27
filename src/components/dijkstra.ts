@@ -2,7 +2,7 @@
 export interface Location {
     id: string;
     coordinates: [number, number]; // [latitude, longitude]
-    neighbors: { id: string; distance: number }[];
+    neighbours: { id: string; distance: number }[];
   }
   
   export type Graph = { [key: string]: Location };
@@ -58,15 +58,15 @@ export class PriorityQueue {
   
       if (currentId === endId) break; // Reached destination
   
-      for (const neighbor of currentLocation.neighbors) {
-        const neighborId = neighbor.id;
-        const distanceToNeighbor = neighbor.distance;
-        const totalDistance = currentDistance + distanceToNeighbor;
+      for (const neighbour of currentLocation.neighbours) {
+        const neighbourId = neighbour.id;
+        const distanceToneighbour = neighbour.distance;
+        const totalDistance = currentDistance + distanceToneighbour;
   
-        if (totalDistance < distances[neighborId]) {
-          distances[neighborId] = totalDistance;
-          previous[neighborId] = currentId;
-          pq.enqueue([neighborId, totalDistance]);
+        if (totalDistance < distances[neighbourId]) {
+          distances[neighbourId] = totalDistance;
+          previous[neighbourId] = currentId;
+          pq.enqueue([neighbourId, totalDistance]);
         }
       }
     }
