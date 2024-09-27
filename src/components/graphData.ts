@@ -17,3 +17,32 @@ export const graph: Graph = {
    },
 
 }
+
+// import haversineDistance from "./haversineDistance";
+// import { locationsCoordinates } from "./locationsCoordinates";
+// import { Graph } from "./dijkstra";
+
+// export const graph: Graph = {};
+
+// function findNeighbours(location: { location: string, latitude: number, longitude: number }) {
+//     const neighbours = locationsCoordinates
+//         .filter(l => l.location !== location.location) 
+//         .slice(0, 2) 
+//         .map(neighbour => ({
+//             id: neighbour.location,
+//             distance: haversineDistance(
+//                 [location.latitude, location.longitude],
+//                 [neighbour.latitude, neighbour.longitude]
+//             )
+//         }));
+
+//     return neighbours;
+// }
+
+// locationsCoordinates.forEach(location => {
+//     graph[location.location] = {
+//         id: location.location,
+//         coordinates: [location.latitude, location.longitude],
+//         neighbours: findNeighbours(location),
+//     };
+// });
