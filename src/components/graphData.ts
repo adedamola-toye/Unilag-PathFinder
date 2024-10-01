@@ -1,4 +1,4 @@
-import haversineDistance from "./haversineDistance"
+/* import haversineDistance from "./haversineDistance"
 import { Graph } from "./dijkstra"
 
 export const graph: Graph = {
@@ -16,33 +16,57 @@ export const graph: Graph = {
         ]
    },
 
+} */
+
+// graphData.ts
+import { locationsCoordinates } from "./locationsCoordinates";
+import haversineDistance from "./haversineDistance";
+
+interface UnilagLocation {
+  location: string;
+  latitude: number;
+  longitude: number;
 }
 
-// import haversineDistance from "./haversineDistance";
-// import { locationsCoordinates } from "./locationsCoordinates";
-// import { Graph } from "./dijkstra";
+type Graph = {
+  [key: string]: { [key: string]: number };
+};
 
-// export const graph: Graph = {};
+export const graph: Graph = {};
 
-// function findNeighbours(location: { location: string, latitude: number, longitude: number }) {
-//     const neighbours = locationsCoordinates
-//         .filter(l => l.location !== location.location) 
-//         .slice(0, 2) 
-//         .map(neighbour => ({
-//             id: neighbour.location,
-//             distance: haversineDistance(
-//                 [location.latitude, location.longitude],
-//                 [neighbour.latitude, neighbour.longitude]
-//             )
-//         }));
+function createGraph(): Graph {
+  return {};
+}
 
-//     return neighbours;
-// }
+function addNodeToGraph(graph: Graph, location: UnilagLocation) {
+  if (!graph[location.location]) {
+    graph[location.location] = {};
+  }
+}
 
-// locationsCoordinates.forEach(location => {
-//     graph[location.location] = {
-//         id: location.location,
-//         coordinates: [location.latitude, location.longitude],
-//         neighbours: findNeighbours(location),
-//     };
-// });
+function addEdgeToGraph(graph: Graph, loc1: UnilagLocation, loc2: UnilagLocation, distance: number) {
+  graph[loc1.location][loc2.location] = distance;
+  graph[loc2.location][loc1.location] = distance;
+}
+
+function setUpGraph() {
+  for (let i = 0; i < locationsCoordinates.length; i++) {
+    for (let j = i + 1; j < locationsCoordinates.length; j++) {
+      const loc1 = locationsCoordinates[i];
+      const loc2 = locationsCoordinates[j];
+
+      addNodeToGraph(graph, loc1);
+      addNodeToGraph(graph, loc2);
+
+      
+      const distance = haversineDistance([loc1.latitude, loc1.longitude], [loc2.latitude, loc2.longitude]);
+      addEdgeToGraph(graph, loc1, loc2, distance);
+    }
+  }
+}
+
+const initializedGraph = createGraph();
+locationsCoordinates.forEach(location => addNodeToGraph(initializedGraph, location));
+setUpGraph();
+
+export default initializedGraph;
