@@ -1,85 +1,54 @@
+type Graph = {
+  [key: string]: { [key: string]: number };
+};
 
-export interface Location {
-    id: string;
-    coordinates: [number, number]; // [latitude, longitude]
-    neighbours: { id: string; distance: number }[];
+export interface PathResult {
+  path: string[];
+  distance: number;
+}
+
+export function findShortestPath(graph: Graph, start: string, end: string): PathResult | null {
+  const distances: { [key: string]: number } = {};
+  const previous: { [key: string]: string | null } = {};
+  const unvisited: Set<string> = new Set(Object.keys(graph));
+
+  for (const node in graph) {
+      distances[node] = Infinity;
+      previous[node] = null;
   }
-  
-  export type Graph = { [key: string]: Location };
+  distances[start] = 0;
 
-export class PriorityQueue {
-    private collection: [string, number][] = [];
-  
-    enqueue(element: [string, number]) {
-      if (this.isEmpty()) {
-        this.collection.push(element);
-      } else {
-        let added = false;
-        for (let i = 0; i < this.collection.length; i++) {
-          if (element[1] < this.collection[i][1]) {
-            this.collection.splice(i, 0, element);
-            added = true;
-            break;
+  while (unvisited.size > 0) {
+      const currentNode = Array.from(unvisited).reduce((minNode, node) => 
+          distances[node] < distances[minNode] ? node : minNode
+      );
+
+      if (currentNode === end) {
+          const path = [];
+          let temp: string| null = currentNode;
+          while (temp) {
+              path.unshift(temp);
+              temp = previous[temp];
           }
-        }
-        if (!added) {
-          this.collection.push(element);
-        }
+
+          // Return the path and its distance
+          return {
+              path,
+              distance: distances[end], // Get the distance to the end node
+          };
       }
-    }
-  
-    dequeue(): [string, number] {
-      return this.collection.shift()!;
-    }
-  
-    isEmpty(): boolean {
-      return this.collection.length === 0;
-    }
+
+      unvisited.delete(currentNode);
+
+      for (const neighbor in graph[currentNode]) {
+          const newDist = distances[currentNode] + graph[currentNode][neighbor];
+          if (newDist < distances[neighbor]) {
+              distances[neighbor] = newDist;
+              previous[neighbor] = currentNode;
+          }
+      }
   }
 
-  export function dijkstra(graph: Graph, startId: string, endId: string): { path: string[], distance: number } {
-    const distances: { [key: string]: number } = {};
-    const previous: { [key: string]: string | null } = {};
-    
-
-    for (const loc in graph) {
-      distances[loc] = Infinity;
-      previous[loc] = null;
-    }
-    distances[startId] = 0;
-  
-
-    const pq = new PriorityQueue();
-    pq.enqueue([startId, 0]);
-  
-    while (!pq.isEmpty()) {
-      const [currentId, currentDistance] = pq.dequeue();
-      const currentLocation = graph[currentId];
-  
-      if (currentId === endId) break; // Reached destination
-  
-      for (const neighbour of currentLocation.neighbours) {
-        const neighbourId = neighbour.id;
-        const distanceToneighbour = neighbour.distance;
-        const totalDistance = currentDistance + distanceToneighbour;
-  
-        if (totalDistance < distances[neighbourId]) {
-          distances[neighbourId] = totalDistance;
-          previous[neighbourId] = currentId;
-          pq.enqueue([neighbourId, totalDistance]);
-        }
-      }
-    }
-  
-    // shortest path
-    const path: string[] = [];
-    let current = endId;
-    while (previous[current]) {
-      path.unshift(current);
-      current = previous[current]!;
-    }
-    if (current === startId) path.unshift(startId);
-  
-    return { path, distance: distances[endId] };
-  }
-  
+  // Return null if no path is found
+  return null;
+}

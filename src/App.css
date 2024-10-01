@@ -85,7 +85,7 @@ input:focus{
   
 }
 
-.direct-me-btn{
+.direct-me-btn, .back-home-btn {
   margin-top: 2rem;
   padding: 0.7rem 1.5rem;
   border-radius: 10px;
@@ -96,17 +96,17 @@ input:focus{
   cursor: pointer;
 }
 
-.direct-me-btn:hover{
+.direct-me-btn:hover, .back-home-btn:hover{
   background-color: #2b57a5;
   transform: scale(1.05);
 }
 
-.direct-me-btn:active{
+.direct-me-btn:active, .back-home-btn:active{
   background-color: #1f3e73;
   transform: scale(0.98);
 }
 
-.direct-me-btn:focus {
+.direct-me-btn:focus, .back-home-btn:focus {
   outline: none; 
   box-shadow: 0 0 0 4px rgba(54, 109, 197, 0.4); 
 }
@@ -139,6 +139,8 @@ input:focus{
   font-weight: bold;
 }
 
-.map{
-
+.directions-phase{
+  width: 300px
 }
+
+
