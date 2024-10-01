@@ -4,6 +4,7 @@ import { locations } from "./locations";
 import { getDirections } from "./Directions"; 
 import { findShortestPath } from "./dijkstra";
 import graph from './graphData'
+
 /* import { Coordinates } from './locationsCoordinates'; */ 
 
 function UserLocInfo() {
@@ -18,6 +19,7 @@ function UserLocInfo() {
   const [destinationLocationError, setDestinationLocationError] = useState<string | null>(null);
 
 
+  const [directionError, setDirectionError] = useState<string|null>(null)
 
   //State to toggle between input and directions phase
   const [showDirections, setShowDirections] = useState(false)
@@ -57,13 +59,24 @@ function UserLocInfo() {
   };
 
   const handleDirectMeBtn = () => {
-   if (currentLocation && destination){
+    setCurrentLocationError(null);
+    setDestinationLocationError(null);
+
+    if(!currentLocation || !locations.includes(currentLocation)){
+      setCurrentLocationError("Please enter a valid current location");
+
+    }
+    if(!destination || !locations.includes(destination)){
+      setDestinationLocationError("Please enter a valid destination")
+    }
+
+   if (currentLocation && destination  && locations.includes(currentLocation)  && locations.includes(destination)){
       const shortestPath = findShortestPath(graph, currentLocation, destination);
       if(shortestPath){
         setShowDirections(true);
       }
       else{
-        setCurrentLocationError("No path found between the selected locations.")
+        setDirectionError(`No path found between ${currentLocation} and ${destination}.`)
       }
    }
   }
@@ -83,9 +96,13 @@ function UserLocInfo() {
           <h2>
             Directions from {currentLocationInput} to {destinationInput}
           </h2>
-          <ul>
-          <li>{getDirections(currentLocationInput, destinationInput)}</li>
-          </ul>
+          {directionError ? (<p>{directionError}</p>): (
+            <ul>
+            <li>{getDirections(currentLocation, destination)}</li>
+            </ul>
+          )
+        }
+          
           
           <button onClick={handleBackHomeBtn} className="back-home-btn">
             Back Home

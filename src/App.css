@@ -143,4 +143,7 @@ input:focus{
   width: 300px
 }
 
+.error-message{
+  color: red
+}
 
