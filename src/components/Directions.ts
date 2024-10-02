@@ -1,5 +1,3 @@
-
-
 export const directionsMap: { [key: string]: { [key: string]: string } } = {
     "First Gate": {
       "First Gate": "You are already at First Gate.",
