@@ -17,4 +17,6 @@ function haversineDistance(coord1: [number, number], coord2: [number, number]): 
 
     return R * c; // Distance in kilometers
 }
+
+console.log(haversineDistance([6.51854, 3.38490], [6.516783,3.386586 ]))
 export default haversineDistance
