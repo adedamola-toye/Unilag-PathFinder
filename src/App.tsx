@@ -13,7 +13,6 @@ function App() {
         <LogoAndTitle/>
         <div className="main">
             <UserLocInfo/>
-            <Map/>
         </div>
         
 

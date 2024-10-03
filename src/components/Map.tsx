@@ -1,23 +1,15 @@
 import "leaflet/dist/leaflet.css";
 import { useEffect, useState } from "react";
-import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
-import { divIcon, LatLngExpression, Icon } from "leaflet"; 
+import { MapContainer, TileLayer, Marker, Popup, Polyline, useMap } from "react-leaflet";
+import { Icon, divIcon, LatLngExpression } from "leaflet";
 import { locationsCoordinates } from "./locationsCoordinates";
 import markerIcon from "leaflet/dist/images/marker-icon.png";
 
-// URL for red marker icon
+// URL for different colored markers
+const greenMarkerIconUrl = "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-green.png";
 const redMarkerIconUrl = "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png";
+const blueMarkerIconUrl = "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-blue.png";
 
-// Default blue marker icon configuration
-const defaultIcon = new Icon({
-  iconUrl: markerIcon,
-  iconSize: [25, 41],
-  iconAnchor: [12, 41],
-  popupAnchor: [1, -34],
-  shadowSize: [41, 41],
-});
-
-// Custom red marker icon configuration for the current location
 const redIcon = new Icon({
   iconUrl: redMarkerIconUrl,
   iconSize: [25, 41],
@@ -26,19 +18,32 @@ const redIcon = new Icon({
   shadowSize: [41, 41],
 });
 
-interface Coordinate {
-  location: string;
-  latitude: number;
-  longitude: number;
+const greenIcon = new Icon({
+  iconUrl: greenMarkerIconUrl,
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  shadowSize: [41, 41],
+});
+
+interface MapProps {
+  pathNodes: string[];
 }
 
-function FitMapToBounds({ coordinates }: { coordinates: Coordinate[] }): null {
+// Helper function to get coordinates for a location name
+const getCoordinatesForLocation = (locationName: string): LatLngExpression | null => {
+  const location = locationsCoordinates.find(coord => coord.location === locationName);
+  return location ? [location.latitude, location.longitude] : null;
+};
+
+// Component to handle map bounds
+function MapBounds({ coordinates }: { coordinates: typeof locationsCoordinates }) {
   const map = useMap();
 
   useEffect(() => {
     if (coordinates.length > 0) {
       const bounds = coordinates.map(
-        (coordinate) => [coordinate.latitude, coordinate.longitude] as [number, number]
+        coord => [coord.latitude, coord.longitude] as [number, number]
       );
       map.fitBounds(bounds);
     }
@@ -47,10 +52,50 @@ function FitMapToBounds({ coordinates }: { coordinates: Coordinate[] }): null {
   return null;
 }
 
-// Custom label for marker with location name
+// Progressive path drawing component
+function ProgressivePath({ pathNodes }: { pathNodes: string[] }) {
+  const [visiblePath, setVisiblePath] = useState<LatLngExpression[]>([]);
+
+  useEffect(() => {
+    setVisiblePath([]);
+    
+    if (pathNodes.length === 0) return;
+
+    const firstCoord = getCoordinatesForLocation(pathNodes[0]);
+    if (!firstCoord) return;
+    
+    setVisiblePath([firstCoord]);
+
+    let currentIndex = 1;
+    const interval = setInterval(() => {
+      if (currentIndex < pathNodes.length) {
+        const nextCoord = getCoordinatesForLocation(pathNodes[currentIndex]);
+        if (nextCoord) {
+          setVisiblePath(prev => [...prev, nextCoord]);
+        }
+        currentIndex++;
+      } else {
+        clearInterval(interval);
+      }
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [pathNodes]);
+
+  return (
+    <Polyline 
+      positions={visiblePath}
+      color="red"
+      weight={3}
+      opacity={0.7}
+    />
+  );
+}
+
+
 function createLabelIcon(locationName: string) {
   return divIcon({
-    className: "custom-marker-label", // Custom class for the marker
+    className: "custom-marker-label",
     html: `<div class="marker-icon-label">
             <img src="${markerIcon}" style="display: block; margin-bottom: 5px;" />
             <span>${locationName}</span>
@@ -62,31 +107,30 @@ function createLabelIcon(locationName: string) {
   });
 }
 
-function Map() {
+function Map({ pathNodes }: MapProps) {
   const [userLocation, setUserLocation] = useState<LatLngExpression | null>(null);
 
+  // Get user's location
   useEffect(() => {
-    // Get the user's current location
     navigator.geolocation.getCurrentPosition(
       (position) => {
-        const userLat = position.coords.latitude;
-        const userLng = position.coords.longitude;
-
-        // Set the user location
-        setUserLocation([userLat, userLng]);
+        const { latitude, longitude } = position.coords;
+        setUserLocation([latitude, longitude]);
       },
       (error) => {
-        console.error("Error getting location", error);
+        console.error("Error getting user location:", error);
       }
     );
   }, []);
 
+  // Get center coordinates (prioritize: first path node > user location > default)
+  const firstPathCoord = pathNodes.length > 0 ? getCoordinatesForLocation(pathNodes[0]) : null;
+  const centerCoord = firstPathCoord || userLocation || [6.51870, 3.39732];
+
   return (
     <MapContainer
-      className="map"
-      center={userLocation || [6.51870, 3.39732]}  // Center on user location or fallback location
-      zoom={18} 
-      minZoom={16}
+      center={centerCoord}
+      zoom={15}
       style={{ height: "500px", width: "100%" }}
       scrollWheelZoom={true}
     >
@@ -95,26 +139,52 @@ function Map() {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       />
 
-      <FitMapToBounds coordinates={locationsCoordinates} />
+      {/* Fit map to show all locations */}
+      <MapBounds coordinates={locationsCoordinates} />
 
+      {/* Show all available locations */}
       {locationsCoordinates.map((location, index) => (
         <Marker
-          key={index}
+          key={`location-${index}`}
           position={[location.latitude, location.longitude]}
-          icon={createLabelIcon(location.location)} // Custom label for each location
+          icon={createLabelIcon(location.location)}
         >
           <Popup>{location.location}</Popup>
         </Marker>
       ))}
 
+      {/* Show user's location */}
       {userLocation && (
         <Marker
           position={userLocation}
-          icon={redIcon} // Red icon for the user's current location
+          icon={greenIcon}
         >
-          <Popup>You are here</Popup>
+          <Popup>Your Location</Popup>
         </Marker>
       )}
+
+      {/* Progressive path drawing */}
+      <ProgressivePath pathNodes={pathNodes} />
+
+      {/* Highlight path nodes */}
+      {pathNodes.map((node, index) => {
+        const coord = getCoordinatesForLocation(node);
+        if (!coord) return null;
+        
+        return (
+          <Marker
+            key={`path-${index}`}
+            position={coord}
+            icon={redIcon}
+          >
+            <Popup>
+              {node}
+              {index === 0 && " (Start)"}
+              {index === pathNodes.length - 1 && " (Destination)"}
+            </Popup>
+          </Marker>
+        );
+      })}
     </MapContainer>
   );
 }
