@@ -10,11 +10,22 @@ export const directionsMap: { [key: string]: { [key: string]: string } } = {
     // Add more locations and directions here
   };
   
-  export function getDirections(currentLocation: string, destination: string): string {
+/*   export function getDirections(currentLocation: string, destination: string): string {
     if (directionsMap[currentLocation] && directionsMap[currentLocation][destination]) {
       return directionsMap[currentLocation][destination];
     } else {
       return "Directions not found for the given locations.";
     }
+  } */
+
+import {PathResult, findShortestPath} from './dijkstra'
+import graph  from './graphData';
+export function getDirections(start: string, end: string): string[] | null{
+  const result: PathResult| null = findShortestPath(graph, start, end)
+  if(!result){
+    return null;
   }
+
+  return result.path
+}
   

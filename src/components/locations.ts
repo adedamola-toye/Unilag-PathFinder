@@ -53,5 +53,6 @@ export const locations = [
     "Tayo Aderinokun Lecture Theatre",
     "Jelili Adebisi Omotola Hall (Unilag Multipurpose Hall)",
     "Nurudeen Alao Auditorium",
-    "Unilag Amphiteathre"
+    "Unilag Amphitheatre",
+    "Honours Hostel"
 ]

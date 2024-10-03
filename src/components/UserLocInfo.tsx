@@ -74,6 +74,8 @@ function UserLocInfo() {
       const shortestPath = findShortestPath(graph, currentLocation, destination);
       if(shortestPath){
         setShowDirections(true);
+        console.log(`Shortest path from ${currentLocation} to ${destination}:`, shortestPath.path);
+        console.log(`Total distance: ${shortestPath.distance} km`); 
       }
       else{
         setDirectionError(`No path found between ${currentLocation} and ${destination}.`)
@@ -97,13 +99,12 @@ function UserLocInfo() {
             Directions from {currentLocationInput} to {destinationInput}
           </h2>
           {directionError ? (<p>{directionError}</p>): (
-            <ul>
-            <li>{getDirections(currentLocation, destination)}</li>
+            <ul>{getDirections(currentLocation, destination) ?. map((location, index) => (
+                <li key={index}>{location}</li>
+            ))}
             </ul>
           )
         }
-          
-          
           <button onClick={handleBackHomeBtn} className="back-home-btn">
             Back Home
           </button>

@@ -69,13 +69,25 @@ export const locationsCoordinates = [
         latitude: 6.51143, 
         longitude: 3.39328,
     },
+    
+    {
+        location: "Honours Hostel",
+        latitude: 6.51092, 
+        longitude: 3.39367,
+    },
+    {
+        location: "Unilag Women Society Hostel (ULWS)",
+        latitude: 6.51143, 
+        longitude: 3.39328,
+    },
+
     {
         location:"New Hall Shopping Complex",
         latitude: 6.51891, 
         longitude: 3.39253,
     },
     {
-        location:"New Hall ",
+        location:"New Hall",
         latitude: 6.51931, 
         longitude: 3.39198 ,
     },
@@ -276,7 +288,7 @@ export const locationsCoordinates = [
         longitude: 3.39258
     },
     {
-        location: "Unilag Amphiteathre",
+        location: "Unilag Amphitheatre",
         latitude: 6.51817, 
         longitude: 3.38998
     },
