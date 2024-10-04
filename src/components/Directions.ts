@@ -18,12 +18,36 @@ export const directionsMap: { [key: string]: { [key: string]: string } } = {
 
 import {PathResult, findShortestPath} from './dijkstra'
 import graph  from './graphData';
+import { edges } from './graphData';
+
+function getIntermediatePathInstructions(from: string, to: string): string{
+  const step = edges.find(
+    (dir) => (dir.from === from && dir.to === to) || (dir.from === to && dir.to == from)
+  )
+  return  step?.instruction ??`Go from ${from} to ${to}`
+}
 export function getDirections(start: string, end: string): string[] | null{
   const result: PathResult| null = findShortestPath(graph, start, end)
   if(!result){
     return null;
   }
 
-  return result.path
+  const path = result.path
+  const directionsArray: string[] = []
+
+  for(let i = 0; i<path.length-1; i++){
+    const from = path[i]
+    const to = path[i+1]
+
+    if(from && to){
+      const instruction = getIntermediatePathInstructions(from, to);
+      directionsArray.push(instruction)
+    }
+    else{
+      console.log(`Invalid path from ${from} to ${to}`)
+    }
+    
+  }
+  return directionsArray
 }
   

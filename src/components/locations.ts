@@ -11,6 +11,7 @@ export const locations = [
     "Faculty of Management Sciences",
     "Faculty of Social Sciences",
     "Distance Learning Institute (DLI)",
+    "New Hall",
     "New Hall Shopping Complex",
     "Unilag Pharmacy",
     "ISL Unilag",

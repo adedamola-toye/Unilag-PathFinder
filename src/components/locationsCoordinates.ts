@@ -224,8 +224,8 @@ export const locationsCoordinates = [
     },
     {
         location:  "Senate Building",
-        latitude: 6.52738, 
-        longitude: 3.39708
+        latitude: 6.51982, 
+        longitude: 3.39875
     },
     {
         location: "Lagoon Front",
