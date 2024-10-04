@@ -8,7 +8,7 @@ import markerIcon from "leaflet/dist/images/marker-icon.png";
 // URL for different colored markers
 const greenMarkerIconUrl = "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-green.png";
 const redMarkerIconUrl = "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png";
-const blueMarkerIconUrl = "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-blue.png";
+//const blueMarkerIconUrl = "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-blue.png";
 
 const redIcon = new Icon({
   iconUrl: redMarkerIconUrl,

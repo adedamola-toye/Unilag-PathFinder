@@ -1,7 +1,7 @@
 import LogoAndTitle from "./components/LogoAndTitle"
 import './App.css'
 import UserLocInfo from "./components/UserLocInfo"
-import Map from "./components/Map"
+
 import haversineDistance
  from "./components/haversineDistance"
  import graph from "./components/graphData"
