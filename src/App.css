@@ -1,5 +1,12 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Space+Grotesk:wght@300..700');
+
 body{
-  background-color: whitesmoke
+  font-family: 'Space Grotesk';
+  background:url('/src/assets/lines.jpg');
+  background-repeat: repeat;
+  background-size: 120px;
+  background-position: center;
 }
 
 /* LOGO AND TITLE */
@@ -9,10 +16,10 @@ body{
 }
 
 .logo-and-title{
+  font-family: Poppins;
   display: flex;
   align-items: center;
-  gap: 2px;
-  margin-top: px;
+  gap: 2px; 
 }
 
 .title{
@@ -49,10 +56,19 @@ input:focus{
   color: #1266f1;
 }
 
-.location-input{
-  display:flex;
+.input-flex{
+  display: flex;
   flex-direction: column;
-  gap: 1rem
+  gap: 1rem;
+}
+
+.location-input input{
+  font-family: Poppins;
+}
+
+.map-container{
+  width: 100%;
+  background-color: red;
 }
 
 /* ------------------------------------------------------------------------*/
@@ -118,20 +134,18 @@ input:focus{
   flex-direction: row;
   justify-content: space-between;
   align-items: flex-start;
-  margin: 20px;
+  margin-top: 100px;
   gap: 10rem;
 }
 
 .userLocSection{
   flex: 1;
-  max-width: 400px;
-  padding: 20px;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex-direction: row;
+  justify-content: space-around;
   gap: 3rem;
-  margin-top: 3%;
-  margin-left: 30px;
+  margin:20px;
+
 }
 
 .inputLabel{
@@ -147,3 +161,11 @@ input:focus{
   color: red
 }
 
+@media screen and (max-width:1000px ) {
+  .userLocSection{
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+    gap: 5rem;
+  }
+}
