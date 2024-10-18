@@ -24,7 +24,10 @@ function getIntermediatePathInstructions(from: string, to: string): string{
   const step = edges.find(
     (dir) => (dir.from === from && dir.to === to) || (dir.from === to && dir.to == from)
   )
-  return  step?.instruction ??`Go from ${from} to ${to}`
+  if(step && step.instruction){
+    return step.from === from ? step.instruction[0] : step.instruction[1]
+  }
+  return  `Go from ${from} to ${to}`
 }
 export function getDirections(start: string, end: string): string[] | null{
   const result: PathResult| null = findShortestPath(graph, start, end)

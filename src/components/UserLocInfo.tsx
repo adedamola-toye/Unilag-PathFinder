@@ -101,7 +101,8 @@ function UserLocInfo() {
           </h2>
           {directionError ? (<p>{directionError}</p>): (
             <ul>{getDirections(currentLocation, destination) ?. map((location, index) => (
-                <li key={index}>{location}</li>
+                <li key={index}
+                className = {locations.includes(location) ? "highlighted-location": ""}>{location}</li>
             ))}
             </ul>
           )

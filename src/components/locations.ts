@@ -55,5 +55,6 @@ export const locations = [
     "Jelili Adebisi Omotola Hall (Unilag Multipurpose Hall)",
     "Nurudeen Alao Auditorium",
     "Unilag Amphitheatre",
-    "Honours Hostel"
+    "Honours Hostel",
+    "Center for Information and Technology System (CITS)"
 ]

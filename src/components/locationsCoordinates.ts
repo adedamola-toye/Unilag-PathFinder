@@ -292,6 +292,11 @@ export const locationsCoordinates = [
         latitude: 6.51817, 
         longitude: 3.38998
     },
+    {
+        location: "Center for Information and Technology System (CITS)",
+        latitude: 6.51849, 
+        longitude: 3.39541
+    },
 
     
 

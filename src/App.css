@@ -67,7 +67,7 @@ input:focus{
 }
 
 .map-container{
-  width: 100%;
+  width: 90%;
 }
 
 /* ------------------------------------------------------------------------*/
@@ -144,6 +144,7 @@ input:focus{
   justify-content: space-around;
   gap: 3rem;
   margin:20px;
+  width: 1000px
 
 }
 
@@ -153,7 +154,12 @@ input:focus{
 }
 
 .directions-phase{
-  width: 300px
+  width: 400px;
+  margin-left: 20px;
+}
+
+.highlighted-location{
+  color: red
 }
 
 .error-message{
